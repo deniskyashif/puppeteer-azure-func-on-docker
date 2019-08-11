@@ -7,16 +7,18 @@ namespace PuppeteerAzureFunc.Examples
     using Microsoft.AspNetCore.Http;
     using Microsoft.Extensions.Logging;
     using PuppeteerSharp;
+    using System.IO;
+    using System;
 
-    public static class Title
+    public static class Screenshot
     {
-        [FunctionName("Examples-Title")]
+        [FunctionName("Examples-Screenshot")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Examples/Title")] HttpRequest req, ILogger log)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Examples/Screenshot")] HttpRequest req, ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
 
-            string url = req.Query["url"];
+            var url = req.Query["url"];
 
             if (string.IsNullOrWhiteSpace(url))
                 return new BadRequestObjectResult("Please pass a url on the query string or in the request body");
@@ -25,14 +27,19 @@ namespace PuppeteerAzureFunc.Examples
             var browser = await Puppeteer.LaunchAsync(new LaunchOptions
             {
                 Args = new[] { "--no-sandbox" },
-                Headless = true,
+                Headless = true
             });
             var page = await browser.NewPageAsync();
             await page.GoToAsync(url);
-            var title = await page.GetTitleAsync();
+
+            var fileName = $"{DateTime.Now.Ticks}.png";
+            await page.ScreenshotAsync(fileName);
             await browser.CloseAsync();
 
-            return new OkObjectResult(title);
+            var content = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+            File.Delete(fileName);
+
+            return new FileStreamResult(content, "application/octet-stream");
         }
     }
 }
