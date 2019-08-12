@@ -19,13 +19,13 @@ curl -v http://localhost:8080/api/Examples/Title?url=https://github.com
 ### Take a screenshot of a page
 
 ```sh
-curl -v http://localhost:8080/api/Examples/Screenshot?url=http://github.com -o page.png
+curl -v http://localhost:8080/api/Examples/Screenshot?url=http://github.com -o ./page.png
 ```
 
 ### Download page as a PDF
 
 ```sh
-curl -v http://localhost:8080/api/Examples/Pdf?url=http://github.com -o page.pdf
+curl -v http://localhost:8080/api/Examples/Pdf?url=http://github.com -o ./page.pdf
 ```
 
 ## Local Development
@@ -47,4 +47,8 @@ func start
 func new --name MyFunction --template "HttpTrigger"
 ```
 
-For building custom images and deploying them on Azure, refer to [this article](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-function-linux-custom-image#run-the-build-command).
+PuppeteerSharp [API reference](https://www.puppeteersharp.com/api/index.html).
+
+For building custom images and deploying them on Azure, refer to [this article](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-function-linux-custom-image#run-the-build-command).  
+
+
