@@ -38,7 +38,7 @@ curl -v http://localhost:8080/api/Examples/Pdf?url=http://github.com -o ./page.p
 ### Run the project
 
 ```sh
-func start
+func start -p 8080
 ```
 
 ### Add your own functions
