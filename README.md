@@ -1,7 +1,9 @@
 # Puppeteer Azure Functions on Docker
 
 A base Docker image of an Azure Function App with [Puppeteer](https://github.com/GoogleChrome/puppeteer) installed.  
-Create Puppeteer scripts which can be deployed as web services on Azure.
+Create Puppeteer scripts which can be deployed a web service on Azure.
+
+Runs Azure Functions v3.0 on .NET Core v3.0
 
 ## Run the Examples
 
